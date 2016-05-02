@@ -24,6 +24,7 @@ module Mongoid
       # @since 2.0.0.rc.1
       def __build__(name, object, metadata)
         relation = create_relation(object, metadata)
+        raise Exception unless (relation.nil? || relation.is_a?(Array) || metadata.polymorphic? || relation.class === metadata.klass)
         set_relation(name, relation)
       end
 
